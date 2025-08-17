@@ -12,8 +12,9 @@ from core.dependencies import (
 )
 from models.requests import LocationCoordinates, SearchRequest
 from models.responses import HealthResponse, RestaurantResponse, SearchResponseModel
-from services.ai_service import GeminiAIService, SessionService
+from services.ai_service import GeminiAIService
 from services.restaurant_service import RestaurantService
+from services.session_service import SessionService
 from utils.ai_response_utils import check_if_ai_has_follow_up_questions
 
 router = APIRouter()
@@ -36,7 +37,7 @@ async def search_restaurants(
     user_session = None
     try:
         # 1. 取得用戶會話
-        user_session = session_service.get_session(request.user_id)
+        user_session = session_service.get_or_create(request.user_id)
 
         # 2. 將新的用戶輸入加入會話歷史
         from models.data_models import ChatMessage
