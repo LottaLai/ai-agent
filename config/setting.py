@@ -1,6 +1,6 @@
-from functools import lru_cache
 import os
 from dataclasses import dataclass
+from functools import lru_cache
 
 
 @dataclass
@@ -8,7 +8,7 @@ class AISettings:
     """AI 服務設定"""
 
     api_key: str
-    model: str = "gemini-2.0-flash-exp"  # 注意：正確的模型名稱
+    model: str = "gemini-2.0-flash-lite"  # 注意：正確的模型名稱
     max_tokens: int = 1000
     temperature: float = 0.7
     top_p: float = 0.9

@@ -8,11 +8,11 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 # 假設的資料導入
-from api.routes import router
-from core.config import get_config
-from core.dependencies import setup_dependencies
-from core.logging import setup_logging
-from models.responses import HealthResponse
+from app.api.routes import router
+from app.models.responses import HealthResponse
+from config.config import get_config
+from config.dependencies import setup_dependencies
+from config.logging import setup_logging
 
 
 def create_application() -> FastAPI:
