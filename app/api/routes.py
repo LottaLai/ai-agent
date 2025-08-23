@@ -11,7 +11,6 @@ from app.constants.enums import MessageRole
 from app.models.requests import SearchRequest
 from app.models.responses import HealthResponse, RestaurantResponse, SearchResponseModel
 from app.services.ai_service import GeminiAIService
-from app.services.restaurant_service import RestaurantService
 from app.services.session_service import SessionService
 from config.dependencies import (
     get_ai_service,
@@ -257,21 +256,28 @@ async def _build_search_response(ai_service, search_result, user_session, reques
     user_session.add_message(MessageRole.ASSISTANT, response.message)
 
     # 轉換為 API 格式
-    restaurant_responses = [
-        RestaurantResponse(
-            id=r.id,
-            name=r.name,
-            cuisine=r.cuisine,
-            distance_km=r.distance_km or 0.0,
-            rating=r.rating,
-            price_level=r.price_level,
-            tags=r.tags,
-            address=r.address,
-            phone=r.phone,
-            description=r.description,
-        )
-        for r in restaurants
-    ]
+    restaurant_responses = []
+    for r in restaurants:
+        try:
+            restaurant_responses.append(
+                RestaurantResponse(
+                    id=r.id,
+                    name=r.name,
+                    cuisine=r.cuisine,
+                    distance_km=r.distance_km or 0.0,
+                    rating=r.rating,
+                    price_level=r.price_level,
+                    tags=r.tags,
+                    address=r.address,
+                    phone=r.phone,
+                    description=r.description,
+                )
+            )
+        except Exception as e:
+            logger.warning(f"轉換餐廳回應失敗: {e}")
+
+    # 判斷回應類型
+    response_type = "success" if restaurants else "partial"
 
     return SearchResponseModel(
         type=response.type.value,
