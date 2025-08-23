@@ -1,4 +1,4 @@
-from ...constants.enums import PromptType
+from app.constants.enums import PromptType
 
 
 class PromptConfig:

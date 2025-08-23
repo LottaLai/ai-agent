@@ -1,3 +1,4 @@
+# main.py - 确保使用 app 结构
 import logging
 from datetime import datetime
 
@@ -7,9 +8,13 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-# 假設的資料導入
 from app.api.routes import router
+from app.core.dependencies import setup_dependencies
+from app.core.logging import setup_logging
+from app.core.setting import get_config
 from app.models.responses import HealthResponse
+
+# 使用 app 结构的导入
 
 
 def create_application() -> FastAPI:

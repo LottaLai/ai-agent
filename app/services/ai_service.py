@@ -7,13 +7,13 @@ from google import genai
 from google.genai import types
 
 from app.ai.builders.prompt_builder import SystemPromptBuilder
-from app.ai.config.prompt_config import PromptConfig
-from app.constants.enums import MessageRole, PromptType
-from app.models.data_models import ChatMessage
-from app.models.user_session import UserSession
-from app.utils.exceptions import AIServiceError
-from app.utils.formatters import ResponseFormatter
-from config.setting import AISettings
+
+from ..ai.config.prompt_config import PromptConfig
+from ..constants.enums import MessageRole, PromptType
+from ..core.setting import AISettings
+from ..models.data_models import ChatMessage
+from ..utils.exceptions import AIServiceError
+from ..utils.formatters import ResponseFormatter
 
 logger = logging.getLogger(__name__)
 

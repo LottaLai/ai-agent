@@ -200,7 +200,7 @@ response = requests.post("http://localhost:8000/search", json={
 ```bash
 # AI 配置
 GEMINI_API_KEY=your_api_key
-GEMINI_MODEL=gemini-2.0-flash-exp
+GEMINI_MODEL=gemini-2.0-flash-lite
 GEMINI_MAX_TOKENS=1000
 GEMINI_TEMPERATURE=0.7
 

@@ -1,6 +1,7 @@
 from typing import Dict
 
-from ...constants.enums import PromptType
+from app.constants.enums import PromptType
+
 from ..domain.restaurant_knowledge import RestaurantDomainKnowledge
 from ..models.prompt_template import PromptTemplate
 

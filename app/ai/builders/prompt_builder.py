@@ -1,8 +1,5 @@
-from typing import Dict
-
-from ...constants.enums import PromptType
-from ..models.prompt_template import PromptTemplate
-from ..templates.prompt_templates import PromptTemplateRegistry
+from app.ai.templates.prompt_templates import PromptTemplateRegistry
+from app.constants.enums import PromptType
 
 
 class SystemPromptBuilder:

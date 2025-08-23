@@ -1,4 +1,24 @@
-fastapi
-uvicorn
-openai
-requests
+# Web Framework
+fastapi==0.116.1
+uvicorn[standard]==0.35.0
+python-multipart==0.0.6
+
+# Database
+asyncpg==0.29.0
+psycopg2-binary==2.9.10
+
+# AI Services
+google-genai==1.29.0
+
+# Data Processing
+pydantic==2.11.7
+pydantic-core==2.33.2
+
+# HTTP Client
+httpx==0.28.1
+requests==2.32.4
+
+# Utilities
+python-dotenv==1.0.0
+tenacity==9.1.2
+typing-extensions==4.14.1
