@@ -1,5 +1,5 @@
-from app.ai.templates.prompt_templates import PromptTemplateRegistry
-from app.constants.enums import PromptType
+from app.ai.prompts.enums import PromptType
+from app.templates.prompt_templates import PromptTemplateRegistry
 
 
 class SystemPromptBuilder:

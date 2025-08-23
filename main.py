@@ -3,16 +3,16 @@ import logging
 from datetime import datetime
 
 import uvicorn
+from ai.core.dependencies import setup_dependencies
+from ai.core.setting import get_config
+from ai.models.responses import HealthResponse
 
 # FastAPI 相關導入
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api.routes import router
-from app.core.dependencies import setup_dependencies
-from app.core.logging import setup_logging
-from app.core.setting import get_config
-from app.models.responses import HealthResponse
+from app.ai.api.routes import router
+from shared.utils.logging import setup_logging
 
 # 使用 app 结构的导入
 
@@ -80,6 +80,11 @@ app = create_application()
 async def root():
     """根路徑 - 健康檢查"""
     return HealthResponse(status="healthy", timestamp=datetime.now())
+
+@router.get("/health", response_model=HealthResponse)
+async def health_check():
+    """健康檢查端點"""
+    return HealthResponse(status="healthy", timestamp=datetime.now(), version="2.0.0")
 
 
 if __name__ == "__main__":
