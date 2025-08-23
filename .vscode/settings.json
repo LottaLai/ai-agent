@@ -1,49 +1,53 @@
 {
-    // ==== 編輯器常用設定 ====
-    "editor.tabSize": 4,                       // Tab = 4 空格
-    "editor.insertSpaces": true,               // 用空格代替 Tab
-    "editor.detectIndentation": false,         // 不自動偵測縮排
-    "editor.wordWrap": "on",                   // 自動換行
-    "files.autoSave": "onFocusChange",         // 切換視窗時自動儲存
-    "files.trimTrailingWhitespace": true,      // 儲存時移除多餘空格
-    "files.insertFinalNewline": true,          // 儲存時檔尾加換行
-
-    // ==== Python 解譯器與檢查 ====
-    "python.defaultInterpreterPath": "python",
-    "python.analysis.typeCheckingMode": "basic",
-    "python.analysis.autoImportCompletions": true,
-
-    // ==== 儲存時自動格式化 ====
-    "editor.formatOnSave": true,
-    "editor.codeActionsOnSave": {
-        "source.organizeImports": "explicit",
-        "source.fixAll": "explicit"
-    },
-    "[python]": {
-        "editor.defaultFormatter": "ms-python.black-formatter" // Black 格式化
-    },
-
-    // ==== Lint 設定 ====
-    "python.linting.enabled": true,
-    "python.linting.pylintEnabled": true,
-    "python.linting.flake8Enabled": false,
-    "python.linting.mypyEnabled": false,
-
-    // ==== isort 設定（import 排序） ====
-    "python.sortImports.args": [
-        "--profile", "black"
+    "python.analysis.extraPaths": [
+        "./app"
     ],
+  // ==== 編輯器常用設定 ====
+  "editor.tabSize": 4, // Tab = 4 空格
+  "editor.insertSpaces": true, // 用空格代替 Tab
+  "editor.detectIndentation": false, // 不自動偵測縮排
+  "editor.wordWrap": "on", // 自動換行
+  "files.autoSave": "onFocusChange", // 切換視窗時自動儲存
+  "files.trimTrailingWhitespace": true, // 儲存時移除多餘空格
+  "files.insertFinalNewline": true, // 儲存時檔尾加換行
 
-    // ==== 終端機 ====
-    "terminal.integrated.defaultProfile.windows": "Command Prompt",
-    "terminal.integrated.fontSize": 14,
+  // ==== Python 解譯器與檢查 ====
+  "python.defaultInterpreterPath": "python",
+  "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.autoImportCompletions": true,
 
-    // ==== IntelliSense ====
-    "editor.quickSuggestions": {
-        "other": true,
-        "comments": false,
-        "strings": true
-    },
-    "editor.suggestSelection": "first",
-    "editor.parameterHints.enabled": true
+  // ==== 儲存時自動格式化 ====
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit",
+    "source.fixAll": "explicit"
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter" // Black 格式化
+  },
+
+  // ==== 終端機 ====
+  "terminal.integrated.defaultProfile.windows": "Command Prompt",
+  "terminal.integrated.fontSize": 14,
+
+  // ==== IntelliSense ====
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": true
+  },
+  "editor.suggestSelection": "first",
+  "editor.parameterHints.enabled": true,
+
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/__pycache__": true,
+    "**/*.pyc": true,
+    "**/*venv/": true
+  },
+  "python.analysis.extraPaths": ["./app"]
 }
