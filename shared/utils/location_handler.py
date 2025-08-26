@@ -3,7 +3,7 @@
 
 from typing import Any, Dict, Optional, Union
 
-from ai.models.requests import LocationCoordinates
+from app.models.requests import LocationCoordinates
 from shared.utils.geo import GeoUtils
 
 
