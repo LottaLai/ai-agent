@@ -1,8 +1,7 @@
 from datetime import datetime
 from typing import Dict, Optional
 
-from ai.models.user_session import UserSession
-
+from app.models.user_session import UserSession
 from shared.utils.session_interface import SessionInterface
 
 

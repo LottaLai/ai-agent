@@ -1,17 +1,15 @@
 # main.py - 确保使用 app 结构
 import logging
-from datetime import datetime
 
 import uvicorn
-from ai.core.dependencies import setup_dependencies
-from ai.core.setting import get_config
-from ai.models.responses import HealthResponse
 
 # FastAPI 相關導入
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.ai.api.routes import router
+from app.api.main_router import api_router
+from app.core.dependencies import setup_dependencies
+from app.core.setting import get_config
 from shared.utils.logging import setup_logging
 
 # 使用 app 结构的导入
@@ -38,7 +36,7 @@ def create_application() -> FastAPI:
     )
 
     # 註冊路由
-    app.include_router(router)
+    app.include_router(api_router, prefix="/api/v1")
 
     # 設定事件處理器
     app.add_event_handler("startup", startup_event)
@@ -73,19 +71,6 @@ async def shutdown_event():
 
 # 建立應用程式實例
 app = create_application()
-
-
-# 根路徑健康檢查
-@app.get("/", response_model=HealthResponse)
-async def root():
-    """根路徑 - 健康檢查"""
-    return HealthResponse(status="healthy", timestamp=datetime.now())
-
-@router.get("/health", response_model=HealthResponse)
-async def health_check():
-    """健康檢查端點"""
-    return HealthResponse(status="healthy", timestamp=datetime.now(), version="2.0.0")
-
 
 if __name__ == "__main__":
     config = get_config()

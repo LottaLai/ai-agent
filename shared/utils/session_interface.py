@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Dict, Optional
 
-from ai.models.user_session import UserSession
+from app.models.user_session import UserSession
 
 
 class SessionInterface(ABC):

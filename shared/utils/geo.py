@@ -2,7 +2,7 @@
 import math
 from typing import Optional, Tuple
 
-from ai.models.requests import LocationCoordinates
+from app.models.requests import LocationCoordinates
 
 
 class GeoUtils:
