@@ -91,7 +91,6 @@ class RestaurantService:
         if ai_analysis:
             try:
                 import json
-
                 ai_data = json.loads(ai_analysis)
                 if isinstance(ai_data, dict):
                     search_params.update(ai_data)
@@ -168,44 +167,6 @@ class RestaurantService:
             missing_fields=[],
             metadata=metadata,
         )
-
-    def _post_process_restaurants(
-        self, restaurants: List[Restaurant], location_data: Dict[str, Any]
-    ) -> List[Restaurant]:
-        """後處理餐廳資料：計算距離和排序"""
-        if location_data.get("type") == "coordinates":
-            restaurants = self._calculate_distances(restaurants, location_data)
-            # restaurants = self._sort_by_distance(restaurants)
-        return restaurants
-
-    def _calculate_distances(
-        self, restaurants: List[Restaurant], location_data: Dict[str, Any]
-    ) -> List[Restaurant]:
-        """計算餐廳距離"""
-        user_lat = location_data.get("latitude", 0)
-        user_lon = location_data.get("longitude", 0)
-
-        for restaurant in restaurants:
-            if hasattr(restaurant, "latitude") and hasattr(restaurant, "longitude"):
-                if restaurant.latitude is not None and restaurant.longitude is not None:
-                    distance = GeoUtils.calculate_distance(
-                        user_lat, user_lon, restaurant.latitude, restaurant.longitude
-                    )
-                    restaurant.distance_km = round(distance, 2)
-                else:
-                    restaurant.distance_km = 0
-
-        return restaurants
-
-    def _sort_by_distance(self, restaurants: List[Restaurant]) -> List[Restaurant]:
-        """按距離排序"""
-        return sorted(
-            restaurants,
-            key=lambda r: r.distance_km if r.distance_km is not None else float("inf"),
-        )
-
-
-
 
     def _build_error_response(self) -> SearchResponse:
         """構建錯誤回應"""

@@ -49,25 +49,6 @@ class LocationHandler:
         return LocationHandler.DEFAULT_RADIUS.get(location_type, 15.0)
 
     @staticmethod
-    def calculate_distance(
-        location_data: Dict[str, Any], restaurant_lat: float, restaurant_lon: float
-    ) -> Optional[float]:
-        """計算餐廳與用戶位置的距離（公里）"""
-
-        if location_data.get("type") != "coordinates":
-            return None
-
-        user_lat = location_data.get("latitude")
-        user_lon = location_data.get("longitude")
-
-        if user_lat is None or user_lon is None:
-            return None
-
-        return GeoUtils.calculate_distance(
-            user_lat, user_lon, restaurant_lat, restaurant_lon
-        )
-
-    @staticmethod
     def format_location(location_data: Dict[str, Any]) -> str:
         """格式化位置顯示"""
         location_type = location_data.get("type")
@@ -96,6 +77,22 @@ class LocationHandler:
 
         return location_type == "none"  # "none" 也是有效狀態
 
+    @staticmethod
+    def get_coordinates_if_available(location_data: Dict[str, Any]) -> Optional[Dict[str, Any]] :
+        """如果是座標類型，返回座標資訊
+
+        Args:
+            location_data: 處理後的位置資料
+
+        Returns:
+            座標字典或None
+        """
+        if location_data.get("type") == "coordinates":
+            return {
+                "latitude": location_data.get("latitude"),
+                "longitude": location_data.get("longitude")
+            }
+        return None
 
 # 輔助類別：位置處理器（進階功能）
 class LocationProcessor:
@@ -118,5 +115,10 @@ class LocationProcessor:
 
         # 添加有效性檢查
         location_data["is_valid"] = LocationHandler.is_valid_location(location_data)
+
+        # 如果是座標，添加座標資訊
+        coords = LocationHandler.get_coordinates_if_available(location_data)
+        if coords:
+            location_data["coordinates"] = coords
 
         return location_data

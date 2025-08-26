@@ -130,9 +130,6 @@ async def _execute_smart_search(
         # 執行搜尋
         restaurants = await restaurant_service.db_restaurant_repo.search_restaurants(**db_params)
 
-        # 後處理
-        restaurants = restaurant_service._post_process_restaurants(restaurants, location_data)
-
         return {
             "restaurants": restaurants,
             "search_params": search_params,
